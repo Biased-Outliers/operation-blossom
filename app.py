@@ -92,21 +92,23 @@ if file:  # if user uploaded file
         st.table(data = vit_predictions)
         st.write()
 
-# What the hell is this? 
+# What the hell is this? # ME
 #   Provide in details what is happening.
 #   Explain what the app is about
 #   How To?
 
 # Training group of flowers
-# Show past pictures
+# Show past pictures # LAST
 # Information about the flower
-#   Provide details of the flower 
+#   Provide details of the flower # chatGPT
 # Help Button
 # Is this prediction correct?
 
 # ADD A README SON!
 #   ADD GIF of instructions
 #   TO-DOs (future mods)
+#   Highlight Vision Transformer
+#   Why did we use streamlit?
         
 
 
