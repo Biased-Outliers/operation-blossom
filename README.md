@@ -23,6 +23,7 @@ As of now, Blossom utilizes two different computer vision architectures: Convolu
 * Vision Transformers
   * Paper: [Masked Autoencoders Are Scalable Vision Learners](https://arxiv.org/pdf/2111.06377.pdf)
   * [HuggingFace Implementation](https://theaisummer.com/hugging-face-vit/)
+  * [google/vit-base-patch16-224](https://huggingface.co/google/vit-base-patch16-224)
 
 ## To Do's
 * Add details of the predicted flower
