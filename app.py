@@ -1,3 +1,4 @@
+# This is the FRONT OF THE APPLICATION
 # Imports
 import numpy as np
 from PIL import Image
@@ -102,6 +103,10 @@ if file:  # if user uploaded file
 #   Provide details of the flower 
 # Help Button
 # Is this prediction correct?
+
+# ADD A README SON!
+#   ADD GIF of instructions
+#   TO-DOs (future mods)
         
 
 
