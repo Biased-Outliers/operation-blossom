@@ -3,3 +3,5 @@ archive/
 *.zip
 cam.ipynb
 grad_cam.ipynb
+__pychace__
+.ipynb_checkpoints
