@@ -13,7 +13,6 @@ As of now, Blossom utilizes two different computer vision architectures: Convolu
 * Language: Python
 * Frameworks
   * Tensorflow for ConvNet: [ResNet50 using Tensorflow](https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet50/ResNet50)
-    * Research Paper
   * HuggingFace for ViT: [Blossom ViT](https://huggingface.co/taraqur/blossom-vit)
 
 ## Resources
@@ -29,4 +28,5 @@ As of now, Blossom utilizes two different computer vision architectures: Convolu
 * Add details of the predicted flower
 * Add more images for training
 * Expand the classification to more flower species
+* Add ability to upload multiple pictures and predict them all
 * Implement GRAD CAMs
