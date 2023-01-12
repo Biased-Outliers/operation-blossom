@@ -3,6 +3,7 @@ import numpy as np
 from PIL import Image
 import tensorflow as tf
 from transformers import TFViTForImageClassification, AutoImageProcessor
+from pandas import DataFrame
 # import datasets
 import streamlit as st
 
@@ -23,9 +24,12 @@ def vit_predict(image):
 
     probabilities = np.exp(logits)/np.sum(np.exp(logits))
 
-    class_prediction = np.argmax(probabilities)
+    d = DataFrame([categories, probabilities.reshape(-1,1)]).T
+    d.columns = ["Flower", "Confidence"]
+    d.sort_values(by='Confidence', inplace=True, ascending=False)
+    d["Confidence"] = d["Confidence"].apply(lambda row: f"{row[0] * 100:.1f}%")
 
-    return (categories[class_prediction], np.max(probabilities))
+    return d.reset_index(drop=True)
 
 
 @st.cache()
@@ -43,19 +47,63 @@ def cnn_predict(image):
 
     class_prediction = np.argmax(pred)
 
-    return (categories[class_prediction], np.max(pred))
+    d = DataFrame([categories, pred.reshape(-1,1)]).T
+    d.columns = ["Flower", "Confidence"]
+    d.sort_values(by='Confidence', inplace=True, ascending=False)
+    d["Confidence"] = d["Confidence"].apply(lambda row: f"{row[0] * 100:.1f}%")
+    
+    return d.reset_index(drop=True)
 
-st.title('Blossom!')
+st.title('Blossom :blossom:!')
 
 file = st.file_uploader('Upload An Image')
-
 if file:  # if user uploaded file
     image = Image.open(file)
-    st.image(image)
-    cnn_predictions = cnn_predict(image)
-    vit_predictions = vit_predict(image)
-    st.write(f"The CNN predicted it to be {cnn_predictions[0]} with accuracy of {cnn_predictions[1] * 100:.1f}%")
-    st.write(f"The ViT predicted it to be {vit_predictions[0]} with accuracy of {vit_predictions[1] * 100:.1f}%")
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.write(' ')
+
+    with col2:
+        st.image(image)
+
+    with col3:
+        st.write(' ')
+    
+    # st.image(image)
+    st.header("Prediction Results :muscle:")
+
+    column1, column2 = st.columns(2)
+
+    with column1:
+        cnn_predictions = cnn_predict(image)
+        st.subheader("Convolutional Neural Network")
+        result = f"{cnn_predictions['Flower'][0]}"
+        st.write(f"Prediction: {cnn_predictions['Flower'][0].upper()}")
+        st.table(data = cnn_predictions)
+        st.write()
+
+    with column2:    
+        vit_predictions = vit_predict(image)
+        st.subheader("Vision Transformer")
+        st.write(f"Prediction: {vit_predictions['Flower'][0].upper()}")
+        st.table(data = vit_predictions)
+        st.write()
+
+# What the hell is this? 
+#   Provide in details what is happening.
+#   Explain what the app is about
+#   How To?
+
+# Training group of flowers
+# Show past pictures
+# Information about the flower
+#   Provide details of the flower 
+# Help Button
+# Is this prediction correct?
+        
+
 
 
     
