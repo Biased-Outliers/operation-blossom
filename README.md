@@ -6,13 +6,23 @@ Blossom is a computer vision app where you can upload a picture of a flower and 
 The minimum viable product for Blossom is it can classify a flower into 5 categories: daisy, sunflower, dandelion, rose, tulip.
 
 ## Blossom's Architecture
-As of now, Blossom utilizes two different computer vision architectures: Convolutional Neural Networks (ConvNets) and Vision Transformers (ViT). For the ConvNets, we transfered the ResNet50 model using the Tensorflow API and retrained it to fit our flower classification. For the ViT, we transfered the [google/vit-base-patch16-224](https://huggingface.co/google/vit-base-patch16-224) model using the HuggingFace API and retrained it to also fit the flower classification. The ViT trained model can be found here: [Blossom ViT](https://huggingface.co/taraqur/blossom-vit). The results for both architecture is displayed in the app for those who are curious.
+As of now, Blossom utilizes two different computer vision architectures: Convolutional Neural Networks (ConvNets) and Vision Transformers (ViT). For the ConvNets, we transfered the ResNet50 model using the Tensorflow API and retrained it to fit our flower classification. For the ViT, we transfered the [google/vit-base-patch16-224](https://huggingface.co/google/vit-base-patch16-224) model using the HuggingFace API and retrained it to also fit the flower classification. The ViT trained model can be found here: [Blossom ViT](https://huggingface.co/taraqur/blossom-vit). The results for both architecture are displayed in the Streamlit app for those who are curious.
 
 ## TechStack
 * App: Streamlit
-* Programming Language: Python
-* ConvNet: [ResNet50 using Tensorflow](https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet50/ResNet50)
-* ViT: [Blossom ViT using HuggingFace](https://huggingface.co/taraqur/blossom-vit)
+* Language: Python
+* Frameworks
+  * Tensorflow for ConvNet: [ResNet50 using Tensorflow](https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet50/ResNet50)
+    * Research Paper
+  * HuggingFace for ViT: [Blossom ViT](https://huggingface.co/taraqur/blossom-vit)
+
+## Resources
+* ResNet50
+  * Paper: [Deep Residual Learning for Image Recognition](https://arxiv.org/pdf/1512.03385v1.pdf)
+  * [Tensorflow API](https://www.tensorflow.org/api_docs/python/tf/keras/applications/resnet50/ResNet50)
+* Vision Transformers
+  * Paper: [Masked Autoencoders Are Scalable Vision Learners](https://arxiv.org/pdf/2111.06377.pdf)
+  * [HuggingFace Implementation](https://theaisummer.com/hugging-face-vit/)
 
 ## To Do's
 * Add details of the predicted flower
