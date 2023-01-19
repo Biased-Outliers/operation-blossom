@@ -56,6 +56,14 @@ def cnn_predict(image):
     return d.reset_index(drop=True)
 
 st.title('Blossom :blossom:!')
+st.subheader(
+    '''
+    Upload a picture of a flower and the app will detect if the flower is either a
+    daisy, rose, dandelion, tulip, or sunflower. (More classifications to come!) 
+    The app will run two different types of models, Convolutional Neural Networks 
+    and Vision Transformers. 
+    '''
+)
 
 file = st.file_uploader('Upload An Image')
 if file:  # if user uploaded file
