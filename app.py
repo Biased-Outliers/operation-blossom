@@ -8,61 +8,60 @@ from pandas import DataFrame
 # import datasets
 import streamlit as st
 
+from predictions import cnn_predict, vit_predict
+
 categories = ['daisy', 'rose', 'tulip', 'dandelion', 'sunflower']
 
 @st.cache()
-def vit_predict(image):
+def vit_predict_app(image):
 
-    # Loading model
-    vit_model = TFViTForImageClassification.from_pretrained('taraqur/blossom-vit')
+    # # Loading model
+    # vit_model = TFViTForImageClassification.from_pretrained('taraqur/blossom-vit')
 
-    # ViT Preprocessing
-    image_processor = AutoImageProcessor.from_pretrained("google/vit-base-patch16-224")
-    inputs = image_processor(image, return_tensors="tf")
+    # # ViT Preprocessing
+    # image_processor = AutoImageProcessor.from_pretrained("google/vit-base-patch16-224")
+    # inputs = image_processor(image, return_tensors="tf")
     
-    # Prediction
-    logits = vit_model(**inputs).logits
+    # # Prediction
+    # logits = vit_model(**inputs).logits
 
-    probabilities = np.exp(logits)/np.sum(np.exp(logits))
+    # probabilities = np.exp(logits)/np.sum(np.exp(logits))
 
-    d = DataFrame([categories, probabilities.reshape(-1,1)]).T
-    d.columns = ["Flower", "Confidence"]
-    d.sort_values(by='Confidence', inplace=True, ascending=False)
-    d["Confidence"] = d["Confidence"].apply(lambda row: f"{row[0] * 100:.1f}%")
+    # d = DataFrame([categories, probabilities.reshape(-1,1)]).T
+    # d.columns = ["Flower", "Confidence"]
+    # d.sort_values(by='Confidence', inplace=True, ascending=False)
+    # d["Confidence"] = d["Confidence"].apply(lambda row: f"{row[0] * 100:.1f}%")
 
-    return d.reset_index(drop=True)
+    # return d.reset_index(drop=True)
+    return vit_predict(image)
 
 
 @st.cache()
-def cnn_predict(image):
+def cnn_predict_app(image):
 
-    # Loading model
-    cnn_model = tf.keras.models.load_model("./saved_model/transfer_model.h5")    
+    # # Loading model
+    # cnn_model = tf.keras.models.load_model("./saved_model/transfer_model.h5")    
 
-    # CNN Preprocessing
-    image = image.resize((224,224))
-    arr = np.expand_dims(tf.keras.preprocessing.image.img_to_array(image), axis=0)
+    # # CNN Preprocessing
+    # image = image.resize((224,224))
+    # arr = np.expand_dims(tf.keras.preprocessing.image.img_to_array(image), axis=0)
     
-    # Prediction
-    pred = cnn_model.predict(arr)
+    # # Prediction
+    # pred = cnn_model.predict(arr)
 
-    class_prediction = np.argmax(pred)
+    # class_prediction = np.argmax(pred)
 
-    d = DataFrame([categories, pred.reshape(-1,1)]).T
-    d.columns = ["Flower", "Confidence"]
-    d.sort_values(by='Confidence', inplace=True, ascending=False)
-    d["Confidence"] = d["Confidence"].apply(lambda row: f"{row[0] * 100:.1f}%")
+    # d = DataFrame([categories, pred.reshape(-1,1)]).T
+    # d.columns = ["Flower", "Confidence"]
+    # d.sort_values(by='Confidence', inplace=True, ascending=False)
+    # d["Confidence"] = d["Confidence"].apply(lambda row: f"{row[0] * 100:.1f}%")
     
-    return d.reset_index(drop=True)
+    # return d.reset_index(drop=True)
+    return cnn_predict(image)
 
 st.title('Blossom :blossom:!')
-st.subheader(
-    '''
-    Upload a picture of a flower and the app will detect if the flower is either a
-    daisy, rose, dandelion, tulip, or sunflower. (More classifications to come!) 
-    The app will run two different types of models, Convolutional Neural Networks 
-    and Vision Transformers. 
-    '''
+st.text(
+    '''Upload a picture of a flower and the app will detect if the flower is either a daisy, rose, dandelion, tulip, or sunflower (more classifications to come!). The app will run two different types of models, Convolutional Neural Networks and Vision Transformers. '''
 )
 
 file = st.file_uploader('Upload An Image')
