@@ -3,7 +3,7 @@ archive/
 *.zip
 cam.ipynb
 grad_cam.ipynb
-__pychace__
-.ipynb_checkpoints
-saved_model/
-vit-base-patch16-224/
+**/__pycache__
+**/.ipynb_checkpoints
+**/saved_model/
+**/vit-base-patch16-224/
