@@ -5,6 +5,31 @@ Blossom is a computer vision app where you can upload a picture of a flower and 
 
 The minimum viable product for Blossom is it can classify a flower into 5 categories: daisy, sunflower, dandelion, rose, tulip.
 
+## How to Run it Locally
+1. Clone the Repository
+```
+git clone git@github.com:Biased-Outliers/operation-blossom.git
+```
+2. Create a Virtual Environment and activate it (Recommended)
+```
+python3 -m venv VIRTUAL_ENVIRONMENT_NAME
+source VIRTUAL_ENVIRONMENT_NAME/bin/activate
+```
+3. Go into the cloned repository sabi-sands while in your virutal environment
+```
+cd operation-blossom
+```
+4. Install the necessary requirements
+```
+pip install -r requirements.txt
+```
+5. Run Operation Blossom locally 
+```
+streamlit run Home.py
+```
+
+
+
 ## Blossom's Architecture
 As of now, Blossom utilizes two different computer vision architectures: Convolutional Neural Networks (ConvNets) and Vision Transformers (ViT). For the ConvNets, we transfered the ResNet50 model using the Tensorflow API and retrained it to fit our flower classification. For the ViT, we transfered the [google/vit-base-patch16-224](https://huggingface.co/google/vit-base-patch16-224) model using the HuggingFace API and retrained it to also fit the flower classification. The ViT trained model can be found here: [Blossom ViT](https://huggingface.co/taraqur/blossom-vit). The results for both architecture are displayed in the Streamlit app for those who are curious.
 
