@@ -59,9 +59,20 @@ def cnn_predict_app(image):
     # return d.reset_index(drop=True)
     return cnn_predict(image)
 
+st.set_page_config(
+    page_title="Operation Blossom",
+    page_icon=":blossom:",
+)
+
 st.title('Blossom :blossom:!')
-st.text(
-    '''Upload a picture of a flower and the app will detect if the flower is either a daisy, rose, dandelion, tulip, or sunflower (more classifications to come!). The app will run two different types of models, Convolutional Neural Networks and Vision Transformers. '''
+st.markdown(
+    """
+    Upload a picture of a flower and the app will detect 
+    if the flower is either a daisy, rose, dandelion, tulip, 
+    or sunflower (more classifications to come!). The app will 
+    run two different types of models, Convolutional Neural Networks 
+    and Vision Transformers.
+    """
 )
 
 file = st.file_uploader('Upload An Image')
@@ -79,26 +90,37 @@ if file:  # if user uploaded file
     with col3:
         st.write(' ')
     
-    # st.image(image)
-    st.header("Prediction Results :muscle:")
+    cnn_predictions = cnn_predict(image)
+    vit_predictions = vit_predict(image)
 
-    column1, column2 = st.columns(2)
+    tab1, tab2 = st.tabs(["Prediction", "Under the Hood"])
+    # st.image(image)   
 
-    with column1:
-        cnn_predictions = cnn_predict(image)
-        st.subheader("Convolutional Neural Network")
-        result = f"{cnn_predictions['Flower'][0]}"
-        st.write(f"Prediction: {cnn_predictions['Flower'][0].upper()}")
-        st.table(data = cnn_predictions)
-        st.write()
+    with tab1:
+        st.header("Results :muscle:")
+        st.subheader(f"Prediction: {cnn_predictions['Flower'][0].upper()}")
 
-    with column2:    
-        vit_predictions = vit_predict(image)
-        st.subheader("Vision Transformer")
-        st.write(f"Prediction: {vit_predictions['Flower'][0].upper()}")
-        st.table(data = vit_predictions)
-        st.write()
+    with tab2:
+        # column1, column2 = st.columns(2)
 
+        t1, t2, t3 = st.tabs(["Convolutional Neural Networks", "Vision Transformers", "Attention-Based CNN"])
+        with t1:
+            # cnn_predictions = cnn_predict(image)
+            # st.subheader("Convolutional Neural Network")
+            result = f"{cnn_predictions['Flower'][0]}"
+            st.write(f"Prediction: {cnn_predictions['Flower'][0].upper()}")
+            st.table(data = cnn_predictions)
+            st.write()
+
+        with t2:    
+            # vit_predictions = vit_predict(image)
+            st.subheader("Vision Transformer")
+            st.write(f"Prediction: {vit_predictions['Flower'][0].upper()}")
+            st.table(data = vit_predictions)
+            st.write()
+
+        with t3:
+            st.write("COMING SOON!")
 # What the hell is this? # ME
 #   Provide in details what is happening.
 #   Explain what the app is about
